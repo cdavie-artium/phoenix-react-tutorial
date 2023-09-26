@@ -21,10 +21,11 @@ defmodule ReactTodoListWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", ReactTodoListWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", ReactTodoListWeb.Api, as: :api do
+    pipe_through :api
 
+    resources "/tasks", TaskController
+  end
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:react_todo_list, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put

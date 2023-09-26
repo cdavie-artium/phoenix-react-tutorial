@@ -7,7 +7,7 @@ import Config
 # Run `mix help test` for more information.
 config :react_todo_list, ReactTodoList.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "Phoenix1234",
   hostname: "localhost",
   database: "react_todo_list_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
