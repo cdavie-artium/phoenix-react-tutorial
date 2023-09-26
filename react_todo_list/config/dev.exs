@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :react_todo_list, ReactTodoList.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "Phoenix1234",
   hostname: "localhost",
   database: "react_todo_list_dev",
   stacktrace: true,
