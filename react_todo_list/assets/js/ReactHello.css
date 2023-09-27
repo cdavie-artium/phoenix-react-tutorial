@@ -1,0 +1,7 @@
+.react-hello {
+    background: red;
+
+    .title {
+        color: white;
+    }
+}
