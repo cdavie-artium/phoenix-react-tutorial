@@ -10,6 +10,20 @@ config :react_todo_list, ReactTodoList.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+# esbuild needs to be in the PATH; the env key is for the environment passed *to*
+# the command, rather than the environment *running* the command, so it can't be
+# added there.
+System.put_env(
+  "PATH",
+  System.fetch_env!("PATH") <> ":" <> Path.expand("../assets/node_modules/esbuild/bin", __DIR__)
+)
+
+# Passing --watch as the second arg to the esbuild watchers did not seem to make
+# it all the way to the build.js script, even though it *did* get passed to
+# System.cmd("esbuild", ["build.js", "--watch"]) at line 36 in the Phoenix dep's
+# watchers.exs file. So this is a workaround. ¯\_(ツ)_/¯
+System.put_env("ESBUILD_WATCH", "true")
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -25,7 +39,8 @@ config :react_todo_list, ReactTodoListWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "MbfcLXSTfiAaIrBdICWJkWQBhhy7e5W2FJ1nY0DUXmqjD0lBV9UqYVPSgq7GonKr",
   watchers: [
-    esbuild: ["build.js", "--watch", cd: Path.expand("../assets", __DIR__)]
+    mix: [ "assets.build", cd: Path.expand("..", __DIR__) ],
+    esbuild: [ "build.js", cd: Path.expand("../assets", __DIR__) ],
   ]
 
 # ## SSL Support

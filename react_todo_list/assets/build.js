@@ -1,12 +1,15 @@
 const esbuild = require("esbuild");
+const postcss = require('esbuild-postcss');
 
 const args = process.argv.slice(2);
+const watch = args.includes('--watch') || process.env["ESBUILD_WATCH"] === "true"
+
 const loader = {
  '.js': 'jsx'
 };
 
 const plugins = [
-  // Add and configure plugins here
+  postcss(),
 ];
 
 // Define esbuild options
@@ -23,7 +26,7 @@ const opts = {
   minify: args.includes('--deploy'),
 };
 
-if (args.includes('--watch')) {
+if (watch) {
   esbuild
     .context({ ...opts, sourcemap: "inline"})
     .then((ctx) => ctx.watch())

@@ -10,11 +10,16 @@
   "author": "Ryan Durling",
   "license": "ISC",
   "devDependencies": {
-    "esbuild": "^0.19.3"
+    "@types/react": "^18.2.23",
+    "esbuild": "^0.19.3",
+    "esbuild-postcss": "^0.0.4",
+    "postcss": "^8.4.30"
   },
   "dependencies": {
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
-    "phoenix_live_view": "file:../deps/phoenix_live_view"
+    "phoenix_live_view": "file:../deps/phoenix_live_view",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
